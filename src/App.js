@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const list = [
+    "Banana",
+    "Apple",
+    "Orange",
+    "Mango",
+    "Pineapple",
+    "Watermelon"
+  ];
+
+  const [filterList, setFilterList] = useState(list)
+
+  function handleChange(e){
+if(e.target.value === ''){
+  setFilterList(list)
+}
+const newFilter = list.filter(item => item.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1)
+setFilterList(newFilter)
+  }
+
+  return(
+    <div className=".app">
+      <input 
+        type="text"
+        onChange={handleChange}
+      >
+      </input>
+      <div>
+        {filterList.map((item, id) => 
+        <div key={id}>
+        {item}
+        </div>
+          )}
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
